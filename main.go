@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"playAR2/apis/common/connections"
-	"playAR2/apis/model/restaurants"
+	"playAR/apis/common/connections"
+	"playAR/apis/model/restaurants"
 	"time"
 
 	"github.com/davecgh/go-spew/spew"

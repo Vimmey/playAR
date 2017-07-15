@@ -3,7 +3,7 @@ package restaurants
 import (
 	"crypto/rand"
 	"math/big"
-	"playAR2/apis/common/clients/mysqlclient"
+	"playAR/apis/common/clients/mysqlclient"
 )
 
 const (
