@@ -1,9 +1,5 @@
 package mysqlclient
 
-/*
- * Copied from bitbucket.org/Exotel/gondor/api/core/model/common
- */
-
 import (
 	"errors"
 
@@ -79,6 +75,28 @@ func (db *DBM) _getByFilter(
 	} else {
 		err = db.DBase.Where(f).Limit(limit).Offset(offset).Find(table).Error
 	}
+	return db.handleError(err)
+}
+
+// GetByFilter is to get all the results based on limit and offset
+func (db *DBM) GetBulk(
+	table interface{},
+	limit int,
+	offset int,
+) (
+	err error,
+) {
+	return db._getBulk(table, limit, offset)
+}
+
+func (db *DBM) _getBulk(
+	table interface{},
+	limit int,
+	offset int,
+) (
+	err error,
+) {
+	err = db.DBase.Limit(limit).Offset(offset).Find(table).Error
 	return db.handleError(err)
 }
 

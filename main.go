@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"playAR/apis/common/connections"
-	"playAR/apis/model/restaurants"
+	"playAR2/apis/common/connections"
+	"playAR2/apis/model/restaurants"
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
@@ -29,6 +29,7 @@ func main() {
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	spew.Dump(restaurants.GetById(mysqlconn.Dbm, 69859898))
+	spew.Dump(restaurants.GetByLatLong(mysqlconn.Dbm, "17.934378", "75.613404"))
 	fmt.Fprintln(w, "Team playAR rocks!!!")
 }
 

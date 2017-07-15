@@ -3,7 +3,7 @@ package restaurants
 import (
 	"crypto/rand"
 	"math/big"
-	"playAR/apis/common/clients/mysqlclient"
+	"playAR2/apis/common/clients/mysqlclient"
 )
 
 const (
@@ -17,7 +17,7 @@ const (
 	Avg_rating = "avg_rating"
 )
 
-type Restaurant struct {
+type restaurants struct {
 	Id         *int     `gorm:"column:id;primary_key"`
 	Name       *string  `gorm:"column:name"`
 	Cuisine    *string  `gorm:"column:cuisine"`
@@ -28,20 +28,20 @@ type Restaurant struct {
 	Avg_rating *float64 `gorm:"column:avg_rating"`
 }
 
-func NewRestaurant() *Restaurant {
-	return &Restaurant{}
+func NewRestaurant() *restaurants {
+	return &restaurants{}
 }
 
 //Implement mysql.GenericTable interface
-func (*Restaurant) TableName() string {
-	return "Restaurant"
+func (*restaurants) TableName() string {
+	return "restaurants"
 }
 
 func GetById(
 	conn *mysqlclient.DBM,
 	id int,
 ) (
-	*Restaurant,
+	*restaurants,
 	error,
 ) {
 	obj := NewRestaurant()
@@ -59,11 +59,10 @@ func GetByLatLong(
 	lat string,
 	long string,
 ) (
-	*Restaurant,
+	*restaurants,
 	error,
 ) {
-	obj := NewRestaurant()
-	filters := make(map[string]interface{})
+	var obj []*restaurants
 	limit := 20
 
 	// create random offset
@@ -73,8 +72,7 @@ func GetByLatLong(
 	}
 	n := nBig.Int64()
 	offset := int(n)
-	// filters["id"] = id
-	err = conn.GetByFilter(obj, filters, limit, offset)
+	err = conn.GetBulk(obj, limit, offset)
 	if err == mysqlclient.ErrRecordNotFound {
 		return nil, nil
 	}
