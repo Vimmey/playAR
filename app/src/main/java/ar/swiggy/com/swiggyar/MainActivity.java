@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         this.architectView.onPostCreate();
         try {
+            architectView.setLocation(17.934847, 75.616123, 5);
             this.architectView.load("index.html");
         } catch (IOException e) {
             e.printStackTrace();
