@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int WIKITUDE_PERMISSIONS_REQUEST_CAMERA = 1;
     private static final int WIKITUDE_PERMISSIONS_REQUEST_GPS = 2;
-    private static final int PERMISSIONS_REQUEST_CAPTURE_IMAGE = 3;
 
     private static final String TAG = "MainActivity";
 

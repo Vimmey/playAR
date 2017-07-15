@@ -142,10 +142,11 @@ var World = {
 		*/
 		// update panel values
 		$("#poi-detail-title").html(marker.poiData.title);
-		$("#poi-detail-description").html(distanceToUserValue);
-		$("#poi-detail-rating").html(marker.poiData.rating);
-		$("#poi-detail-costfortwo").html(marker.poiData.costForTwo/100);
-		$("#poi-detail-pickuptime").html(marker.poiData.pickupTime);
+		$("#poi-detail-description").html(marker.poiData.description);
+		$("#poi-detail-distance").html(distanceToUserValue);
+//		$("#poi-detail-rating").html(marker.poiData.rating);
+//		$("#poi-detail-costfortwo").html(marker.poiData.costForTwo/100);
+//		$("#poi-detail-pickuptime").html(marker.poiData.pickupTime);
 
 		// show panel
 		$("#panel-poidetail").panel("open", 123);
