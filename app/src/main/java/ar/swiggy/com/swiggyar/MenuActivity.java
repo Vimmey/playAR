@@ -21,10 +21,10 @@ import retrofit2.Response;
 public class MenuActivity extends Activity {
 
     private static final String TAG = "Menu";
-    private final static String restID = "363222332";
 
     RecyclerView recyclerView;
     RelativeLayout cartCheckout;
+    Response<MenuTopHirerachy> mResponse;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,18 +37,18 @@ public class MenuActivity extends Activity {
 
         APIInterface apiService = APIClient.getClient().create(APIInterface.class);
 
-        Call<MenuTopHirerachy> call = apiService.getMenuList(restID);
+        Call<MenuTopHirerachy> call = apiService.getMenuList();
         call.enqueue(new Callback<MenuTopHirerachy>() {
             @Override
             public void onResponse(Call<MenuTopHirerachy> call, Response<MenuTopHirerachy> response) {
+                Log.d("check--", response.toString());
+                mResponse = response;
                 MenuTopHirerachy menu = response.body();
                 recyclerView.setAdapter(new MenuAdapter(menu, R.layout.menu_list_item, getApplicationContext()));
-                Log.d(TAG, "Number of Item received: " + menu.getMenuDetails().size());
             }
 
             @Override
             public void onFailure(Call<MenuTopHirerachy> call, Throwable t) {
-                // Log error here since request failed
                 Log.e(TAG, t.toString());
             }
         });

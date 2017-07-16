@@ -10,8 +10,8 @@ import retrofit2.http.Query;
 
 interface APIInterface {
 
-    @GET("menu")
-    Call<MenuTopHirerachy> getMenuList(@Query("id") String restId);
+    @GET("menu/363222332")
+    Call<MenuTopHirerachy> getMenuList();
 
     @GET("/v2/restaurants")
     Call<ListingTopHirerachy> getRest();

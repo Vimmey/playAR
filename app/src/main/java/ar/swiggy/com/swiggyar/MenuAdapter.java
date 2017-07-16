@@ -33,7 +33,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         }
     }
 
-    public MenuAdapter(MenuTopHirerachy menuModels, int rowLayout, Context context) {
+    MenuAdapter(MenuTopHirerachy menuModels, int rowLayout, Context context) {
         this.menuModels = menuModels.getMenuDetails();
         this.rowLayout = rowLayout;
         this.context = context;

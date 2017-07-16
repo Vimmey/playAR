@@ -1,6 +1,7 @@
 package ar.swiggy.com.swiggyar;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,12 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.wikitude.architect.ArchitectJavaScriptInterfaceListener;
 import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AccelerometerListener {
 
     private static final int WIKITUDE_PERMISSIONS_REQUEST_CAMERA = 1;
     private static final int WIKITUDE_PERMISSIONS_REQUEST_GPS = 2;
@@ -41,6 +46,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         this.architectView.onPostCreate();
+        architectView.addArchitectJavaScriptInterfaceListener(new ArchitectJavaScriptInterfaceListener() {
+            @Override
+            public void onJSONObjectReceived(JSONObject jsonObject) {
+                try {
+                    switch (jsonObject.getString("name")) {
+                        case "markerselected":
+                            final Intent poiDetailIntent = new Intent(MainActivity.this, MenuActivity.class);
+                            startActivity(poiDetailIntent);
+                            break;
+                    }
+                } catch (JSONException e) {
+                    Log.e(TAG, "onJSONObjectReceived: ", e);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
         try {
             architectView.setLocation(17.934847, 75.616123, 5);
             this.architectView.load("index.html");
@@ -86,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         architectView.onResume();
+        if (AccelerometerManager.isSupported(this)) {
+            //Start Accelerometer Listening
+            AccelerometerManager.startListening(this);
+        }
     }
 
     protected void onPause() {
@@ -97,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onStop() {
         super.onStop();
+        if (AccelerometerManager.isListening()) {
+            //Start Accelerometer Listening
+            AccelerometerManager.stopListening();
+        }
     }
 
     protected void onDestroy() {
@@ -111,5 +144,17 @@ public class MainActivity extends AppCompatActivity {
         if (architectView != null) {
             architectView.onLowMemory();
         }
+    }
+
+    @Override
+    public void onAccelerationChanged(float x, float y, float z) {
+
+    }
+
+    @Override
+    public void onShake(float force) {
+//        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+//        startActivity(intent);
+//        finish();
     }
 }

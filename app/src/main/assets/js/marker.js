@@ -59,7 +59,7 @@ function Marker(poiData) {
      });
 
     // create an AR.Label for the marker's title
-    this.titleLabel = new AR.Label(poiData.title.trunc(10), 0.5, {
+    this.titleLabel = new AR.Label(poiData.title.trunc(16), 0.5, {
         zOrder: 1,
         offsetY: offset_y-0.60,
         style: {

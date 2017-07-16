@@ -95,7 +95,7 @@ var World = {
 
 	// user clicked "More" button in POI-detail panel -> fire event to open native screen
     	onPoiDetailMoreButtonClicked: function onPoiDetailMoreButtonClickedFn() {
-    		var currentMarker = World.currentMarker;
+    		var currentMarker = World.markerList[0];
     		var architectSdkUrl = "architectsdk://markerselected?longitude=" + encodeURIComponent(currentMarker.poiData.longitude) + "&latitude=" + encodeURIComponent(currentMarker.poiData.latitude);
     		/*
     			The urlListener of the native project intercepts this call and parses the arguments.
@@ -104,7 +104,18 @@ var World = {
     			Note: you must use 'document.location = "architectsdk://...' to pass information from JavaScript to native.
     			! This will cause an HTTP error if you didn't register a urlListener in native architectView !
     		*/
+    		console.log(architectSdkUrl)
     		document.location = architectSdkUrl;
+
+
+    		var currentMarker = World.markerList[0];
+                    var markerSelectedJSON = {
+                        name: "markerselected",
+                        id: currentMarker.poiData.id,
+                        title: currentMarker.poiData.title,
+                        description: currentMarker.poiData.description
+                    };
+                    AR.platform.sendJSONObject(markerSelectedJSON);
     	},
 
 	// location updates, fired every time you call architectView.setLocation() in native environment
@@ -144,8 +155,8 @@ var World = {
 		$("#poi-detail-title").html(marker.poiData.title);
 		$("#poi-detail-description").html(marker.poiData.description);
 		$("#poi-detail-distance").html(distanceToUserValue);
-//		$("#poi-detail-rating").html(marker.poiData.rating);
-//		$("#poi-detail-costfortwo").html(marker.poiData.costForTwo/100);
+		$("#poi-detail-rating").html(marker.poiData.rating);
+		$("#poi-detail-costfortwo").html("Rs. "+marker.poiData.costForTwo);
 //		$("#poi-detail-pickuptime").html(marker.poiData.pickupTime);
 
 		// show panel
@@ -162,7 +173,9 @@ var World = {
 	// screen was clicked but no geo-object was hit
 	onScreenClick: function onScreenClickFn() {
 		// you may handle clicks on empty AR space too
+//		World.onPoiDetailMoreButtonClicked()
 		console.log("Now this is hell")
+		World.onMarkerSelected(World.markerList[0])
 	},
 
 	// returns distance in meters of placemark with maxdistance * 1.1
