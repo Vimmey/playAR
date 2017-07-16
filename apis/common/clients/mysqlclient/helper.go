@@ -41,7 +41,8 @@ func (db *DBM) GetFirstByFilter(
 ) (
 	err error,
 ) {
-	return db._getByFilter(table, filters, true, 0, 0)
+	// return db._getByFilter(table, filters, true, 0, 0)
+	return db._getByFilter(table, filters, false, 0, 0)
 }
 
 // GetByFilter is to get all the results based on limit and offset
@@ -54,6 +55,18 @@ func (db *DBM) GetByFilter(
 	err error,
 ) {
 	return db._getByFilter(table, filters, false, limit, offset)
+}
+
+// GetByFilter is to get all the results based on limit and offset
+func (db *DBM) GetAllByFilter(
+	table interface{},
+	filters Filter,
+	limit int,
+	offset int,
+) (
+	err error,
+) {
+	return db._getByFilter(table, filters, true, limit, offset)
 }
 
 func (db *DBM) _getByFilter(
@@ -96,7 +109,7 @@ func (db *DBM) _getBulk(
 ) (
 	err error,
 ) {
-	err = db.DBase.Limit(limit).Offset(offset).Find(table).Error
+	err = db.DBase.Find(table).Error
 	return db.handleError(err)
 }
 

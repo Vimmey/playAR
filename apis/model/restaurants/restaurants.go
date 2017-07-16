@@ -59,7 +59,7 @@ func GetByLatLong(
 	lat string,
 	long string,
 ) (
-	*restaurants,
+	[]*restaurants,
 	error,
 ) {
 	var obj []*restaurants
