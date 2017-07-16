@@ -134,8 +134,8 @@ var World = {
 
 
 		// distance and altitude are measured in meters by the SDK. You may convert them to miles / feet if required.
-		var distanceToUserValue = ((marker.poiData.distance / 1000).toFixed(2) + " km");
-
+		var distanceToUserValue = (marker.distanceToUser > 999) ? ((marker.distanceToUser / 1000).toFixed(2) + " km") : (Math.round(marker.distanceToUser) + " m");
+        console.log("Whaaatttttt The FUCK...." )
 		/*
 			In this sample a POI detail panel appears when pressing a cam-marker (the blue box with title & description), 
 			compare index.html in the sample's directory.
@@ -162,6 +162,7 @@ var World = {
 	// screen was clicked but no geo-object was hit
 	onScreenClick: function onScreenClickFn() {
 		// you may handle clicks on empty AR space too
+		console.log("Now this is hell")
 	},
 
 	// returns distance in meters of placemark with maxdistance * 1.1

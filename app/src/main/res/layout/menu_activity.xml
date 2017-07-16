@@ -257,7 +257,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="VIEW CART"
+            android:text="CHECKOUT"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"/>
