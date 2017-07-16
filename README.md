@@ -25,6 +25,7 @@ API's exposed :
 
 /restaurants
 /menu
+/credits
 
 
 Request Format : 
@@ -176,3 +177,42 @@ Response Format :
 ]
 }
 
+GET Request to : /credits
+
+#<Get-params> :  
+id
+
+Ex : http://139.59.79.209/credits?id=44354
+
+
+
+Response Format : 
+
+
+
+{
+"id":44354,
+"credits":2211
+}
+
+
+
+PUT Request to : /credits
+
+#<put-params>
+
+{
+"id":44354,
+"change":10
+}
+
+
+
+Response Format : 
+
+
+
+{
+"id":44354,
+"credits":2211
+}
