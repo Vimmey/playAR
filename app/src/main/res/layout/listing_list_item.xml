@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/restListItem"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/restImage"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@mipmap/ic_launcher"
+                    android:contentDescription="@string/app_name"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/restImage"
+                    android:layout_toRightOf="@+id/restImage"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/restName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@+id/restImage"
+                        android:layout_toRightOf="@+id/restImage"
+                        android:text="Restaurant Name"
+                        android:textColor="@color/black"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/restRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Ratings: 4.3"
+                            android:textColor="#424547"/>
+
+                        <TextView
+                            android:id="@+id/restCFT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="20dp"
+                            android:text="CFT"
+                            android:textColor="#424547"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</LinearLayout>

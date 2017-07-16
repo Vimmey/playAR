@@ -12,4 +12,7 @@ interface APIInterface {
 
     @GET("menu")
     Call<MenuTopHirerachy> getMenuList(@Query("id") String restId);
+
+    @GET("/v2/restaurants")
+    Call<ListingTopHirerachy> getRest();
 }
